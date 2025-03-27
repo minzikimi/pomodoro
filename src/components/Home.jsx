@@ -1,25 +1,42 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Card from './Card'
+import Button from './Button';
+import TimerContext from '../contexts/TimerContext'
+import { useContext } from 'react';
+import tomatoIcon from '../assets/tomato-svgrepo-com.svg'
+
 
 const Home = () => {
-
-
-    const [round, setRound] = useState("");
-    const [goal, setGoal] = useState("");
-    
-  return (
-    <div>
-       <h1>Pomodoro Timer</h1>
-       <div className='card-wrapper'>
-        <Card>00</Card>:<Card>00</Card>
-       </div>
-
-        <div>
-            <h2>{round}/2</h2>
-            <h2>{goal}/2</h2>
+    const { rounds, goals, timeLeft } = useContext(TimerContext);
+  
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+  
+    return (
+      <div>
+        <h1 className="app-title">Pomodoro Timer</h1>
+        <img src={tomatoIcon} alt="Tomato" className="tomato-icon" />
+        <div className="card-wrapper">
+          <Card>{String(minutes).padStart(2, '0')}</Card>
+          <h1>:</h1><Card>{String(seconds).padStart(2, '0')}</Card>
         </div>
-    </div>
-  )
-}
-
-export default Home
+  
+        <Button/>
+  
+        <div className='text-wrapper'>
+          <div className='rounds-wrapper'>
+            <h2>
+              {rounds}/4
+            </h2>
+            <h2>ROUNDS</h2>
+          </div>
+          <div className='goals-wrapper'>
+            <h2>{goals}</h2>
+            <h2>GOALS</h2>
+          </div>
+        </div>
+      </div>
+    );
+  };
+  
+  export default Home;

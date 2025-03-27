@@ -1,14 +1,17 @@
 
 import './App.css'
 import Home from './components/Home'
+import TimerProvider from './contexts/TimerProvider'
 
 function App() {
 
 
   return (
     <>
-
-     <Home />
+    <TimerProvider>
+      <Home />
+    </TimerProvider>
+     
     </>
   )
 }

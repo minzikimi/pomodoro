@@ -1,25 +1,40 @@
 import React from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
-const TimerCard = styled.div`
+const TimerCard = styled(motion.div)`
+  border-radius: 12px;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 120px;
   height: 140px;
-  border-radius: 12px;
-  color: #E34336;
+  font-size: 5rem;
+  color: tomato;
   background: white;
 `;
 
+const cardVariants = {
+  normal: { scale: 1 },
+  changed: { 
+    scale: [1, 1.5, 1],
+    transition: { 
+      duration: 0.3,
+      times: [0, 0.5, 1] 
+    }
+  }
+};
 
-const Card = ({children}) => {
+const Card = ({ children }) => {
   return (
-    <div>
-      <TimerCard>
-        {children}
-      </TimerCard>
-    </div>
+    <TimerCard
+      variants={cardVariants}
+      initial="normal"
+      animate="changed"
+      key={children} //detects change
+    >
+      {children}
+    </TimerCard>
   );
 };
 
